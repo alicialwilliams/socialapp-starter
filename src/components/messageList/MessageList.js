@@ -38,7 +38,7 @@ class MessageList extends React.Component {
       this.handleObserver.bind(this),
       options
     );
-    this.observer.observe(this.loadingRef);
+    // this.observer.observe(this.loadingRef);
   }
 
   handleObserver(entities, observer) {
