@@ -1,9 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { userIsAuthenticated } from "../redux/HOCs";
 import Menu from "../components/menu/Menu";
 import GetUserList from "../components/getUserList/GetUserList";
-import SearchInput from "../components/searchInput/SearchInput";
 import "./PageStyles.css";
 
 class SearchPage extends React.Component {
@@ -16,10 +14,11 @@ class SearchPage extends React.Component {
     return (
       <div className="SearchPage">
         <Menu isAuthenticated={this.props.isAuthenticated} />
-        <ul>
-          <GetUserList />
-          <li>Item 2</li>
-        </ul>
+        <div className="Users-List">
+          <ul>
+            <GetUserList />
+          </ul>
+        </div>
       </div>
     );
   }
