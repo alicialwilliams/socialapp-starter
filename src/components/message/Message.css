@@ -2,7 +2,9 @@ li {
   list-style-type: none;
   border-style: inset;
 }
+
 .MessageIsLiked,
 .MessageIsCreatedIsLiked {
+
   background-color: gold;
 }

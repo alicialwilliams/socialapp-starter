@@ -21,6 +21,7 @@ class MessageList extends React.Component {
   }
 
   componentDidMount() {
+
     this.client
       .getAllMessagesData(this.state.limit, this.state.offset)
       .then((response) => {
@@ -28,6 +29,7 @@ class MessageList extends React.Component {
         console.log(response);
         this.setState({ loading: false });
       });
+
     let options = {
       root: null,
       rootMargin: "0px",
@@ -49,12 +51,15 @@ class MessageList extends React.Component {
       const curMessageArray = this.state.messages;
       this.setState({ loading: true });
       this.client
-        .getAllMessagesData(this.state.limit, lastOffset)
+
+        .getAllMessagesData(this.state.limit, curOffset)
+
         .then((response) => {
           response.data.messages.forEach((msgObj) => {
             curMessageArray.push(msgObj);
           });
           this.setState({ curMessageArray, loading: false, offset: curOffset });
+
         });
       this.setState({ offset: curOffset });
     }
