@@ -21,7 +21,6 @@ class MessageList extends React.Component {
   }
 
   componentDidMount() {
-
     this.client
       .getAllMessagesData(this.state.limit, this.state.offset)
       .then((response) => {
@@ -52,14 +51,13 @@ class MessageList extends React.Component {
       this.setState({ loading: true });
       this.client
 
-        .getAllMessagesData(this.state.limit, curOffset)
+        .getAllMessagesData(this.state.limit, lastOffset)
 
         .then((response) => {
           response.data.messages.forEach((msgObj) => {
             curMessageArray.push(msgObj);
           });
           this.setState({ curMessageArray, loading: false, offset: curOffset });
-
         });
       this.setState({ offset: curOffset });
     }

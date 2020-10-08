@@ -101,7 +101,7 @@ class GetUserList extends React.Component {
 
     return (
       <div className="getUserList">
-        <button onClick={this.handlePhotoMode}>BOOOOOM</button>
+        <button onClick={this.handlePhotoMode}>Photo Only Mode</button>
 
         <Row gutter={20}>
           {this.state.users.map((userObj) => (
