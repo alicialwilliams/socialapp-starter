@@ -1,3 +1,4 @@
-card {
-  overflow-y: scroll;
+.UserCard {
+  height: 500px;
+  overflow-y: hidden;
 }

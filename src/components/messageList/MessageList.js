@@ -100,22 +100,18 @@ class MessageList extends React.Component {
             handleSubmit={this.handleSubmit}
           />
           <h1>Message Feed</h1>
-          <button onClick={this.handleRefresh}>
-            <ReloadOutlined />
-          </button>
-          <div className="MessageList-messages">
-            <ul>
-              {this.state.messages.map((msgObj) => (
-                <Message
-                  keyId={msgObj.id}
-                  {...msgObj}
-                  handleRefresh={this.handleRefresh}
-                />
-              ))}
-              <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
-                <span>Loading...</span>
-              </div>
-            </ul>
+          <div className="MessageList-body">
+            <div className="MessageList-messages">
+              <ul>
+                {this.state.messages.map((msgObj) => (
+                  <Message
+                    keyId={msgObj.id}
+                    {...msgObj}
+                    handleRefresh={this.handleRefresh}
+                  />
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       );
@@ -128,10 +124,7 @@ class MessageList extends React.Component {
             handleRefresh={this.handleRefresh}
           />
           <h1>Message Feed</h1>
-          <button onClick={this.handleRefresh}>
-            <ReloadOutlined />
-          </button>
-          <div className="MessageList-messages">
+          <div className="MessageList-body">
             <ul>
               {this.state.messages.map((msgObj) => (
                 <Message
@@ -140,9 +133,6 @@ class MessageList extends React.Component {
                   handleRefresh={this.handleRefresh}
                 />
               ))}
-              <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
-                <span>Loading...</span>
-              </div>
             </ul>
           </div>
         </div>

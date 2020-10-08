@@ -13,15 +13,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 5%;
-  padding-right: 5%;
 }
 
 .ProfileBody {
   display: flex;
 }
 
-.Users-List {
-  overflow-y: scroll;
-  height: 550px;
+.SettingsBody {
+  display: flex;
 }
