@@ -28,6 +28,7 @@ class MessageList extends React.Component {
         console.log(response);
         this.setState({ loading: false });
       });
+
     let options = {
       root: null,
       rootMargin: "0px",
@@ -38,7 +39,7 @@ class MessageList extends React.Component {
       this.handleObserver.bind(this),
       options
     );
-    // this.observer.observe(this.loadingRef);
+    this.observer.observe(this.loadingRef);
   }
 
   handleObserver(entities, observer) {
@@ -49,7 +50,9 @@ class MessageList extends React.Component {
       const curMessageArray = this.state.messages;
       this.setState({ loading: true });
       this.client
+
         .getAllMessagesData(this.state.limit, lastOffset)
+
         .then((response) => {
           response.data.messages.forEach((msgObj) => {
             curMessageArray.push(msgObj);
@@ -63,7 +66,7 @@ class MessageList extends React.Component {
 
   handleSubmit = () => {
     this.setState((state) => {
-      return { isSubmitted: !state.isSubmitted };
+      return { isSubmitted: !state.isSubmitted, messages: [] };
     });
   };
 
@@ -100,18 +103,22 @@ class MessageList extends React.Component {
             handleSubmit={this.handleSubmit}
           />
           <h1>Message Feed</h1>
-          <div className="MessageList-body">
-            <div className="MessageList-messages">
-              <ul>
-                {this.state.messages.map((msgObj) => (
-                  <Message
-                    keyId={msgObj.id}
-                    {...msgObj}
-                    handleRefresh={this.handleRefresh}
-                  />
-                ))}
-              </ul>
-            </div>
+          <button onClick={this.handleRefresh}>
+            <ReloadOutlined />
+          </button>
+          <div className="MessageList-messages">
+            <ul>
+              {this.state.messages.map((msgObj) => (
+                <Message
+                  keyId={msgObj.id}
+                  {...msgObj}
+                  handleRefresh={this.handleRefresh}
+                />
+              ))}
+              <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
+                <span>Loading...</span>
+              </div>
+            </ul>
           </div>
         </div>
       );
@@ -124,7 +131,10 @@ class MessageList extends React.Component {
             handleRefresh={this.handleRefresh}
           />
           <h1>Message Feed</h1>
-          <div className="MessageList-body">
+          <button onClick={this.handleRefresh}>
+            <ReloadOutlined />
+          </button>
+          <div className="MessageList-messages">
             <ul>
               {this.state.messages.map((msgObj) => (
                 <Message
@@ -133,6 +143,9 @@ class MessageList extends React.Component {
                   handleRefresh={this.handleRefresh}
                 />
               ))}
+              <div ref={(loadingRef) => (this.loadingRef = loadingRef)}>
+                <span>Loading...</span>
+              </div>
             </ul>
           </div>
         </div>
