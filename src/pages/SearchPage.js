@@ -17,6 +17,7 @@ class SearchPage extends React.Component {
         <div className="Users-List">
           <ul>
             <GetUserList />
+
           </ul>
         </div>
       </div>

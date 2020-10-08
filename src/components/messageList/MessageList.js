@@ -21,11 +21,15 @@ class MessageList extends React.Component {
   }
 
   componentDidMount() {
-    this.client.getAllMessagesData(15, this.state.offset).then((response) => {
-      this.setState({ messages: response.data.messages });
-      console.log(response);
-      this.setState({ loading: false });
-    });
+
+    this.client
+      .getAllMessagesData(this.state.limit, this.state.offset)
+      .then((response) => {
+        this.setState({ messages: response.data.messages });
+        console.log(response);
+        this.setState({ loading: false });
+      });
+
     let options = {
       root: null,
       rootMargin: "0px",
@@ -47,12 +51,15 @@ class MessageList extends React.Component {
       const curMessageArray = this.state.messages;
       this.setState({ loading: true });
       this.client
+
         .getAllMessagesData(this.state.limit, curOffset)
+
         .then((response) => {
           response.data.messages.forEach((msgObj) => {
             curMessageArray.push(msgObj);
           });
-          this.setState({ curMessageArray, loading: false });
+          this.setState({ curMessageArray, loading: false, offset: curOffset });
+
         });
       this.setState({ offset: curOffset });
     }
@@ -61,13 +68,13 @@ class MessageList extends React.Component {
 
   handleSubmit = () => {
     this.setState((state) => {
-      return { isSubmitted: !state.isSubmitted };
+      return { isSubmitted: !state.isSubmitted, messages: [] };
     });
   };
 
   handleRefresh = () => {
     this.setState({ refresh: true });
-    this.client.getAllMessagesData().then((response) => {
+    this.client.getAllMessagesData(this.state.limit, 0).then((response) => {
       this.setState({
         messages: response.data.messages,
       });
@@ -76,7 +83,7 @@ class MessageList extends React.Component {
   };
 
   render() {
-    if (!this.state.messages || this.state.refresh) {
+    if (!this.state.messages) {
       return (
         <div className="MessageList">
           <CreateMessage
