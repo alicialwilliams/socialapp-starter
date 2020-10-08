@@ -63,7 +63,7 @@ class MessageList extends React.Component {
 
   handleSubmit = () => {
     this.setState((state) => {
-      return { isSubmitted: !state.isSubmitted };
+      return { isSubmitted: !state.isSubmitted, messages: [] };
     });
   };
 
